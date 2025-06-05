@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;  // Needed for @RestController, @RequestMapping, etc.
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping({"/", "/customers"})
 public class CustomerController {
     @Autowired
     private CustomerService service;

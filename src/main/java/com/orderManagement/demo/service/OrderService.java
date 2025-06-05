@@ -1,27 +1,30 @@
-package com.orderManagement.demo.controller;
+package com.orderManagement.demo.service;
 
+import com.orderManagement.demo.model.Customer;
 import com.orderManagement.demo.model.Order;
+import com.orderManagement.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+import com.orderManagement.demo.repository.CustomerRepository;
 
 import java.util.List;
+@Service
 
-@RestController
-@RequestMapping("/orders")
-public class OrderController {
-
+public class OrderService {
     @Autowired
-    private OrderService service;
+    private OrderRepository orderRepo;
+    @Autowired
+    private CustomerRepository customerRepo;
 
-    @PostMapping("/{customerId}")
-    public ResponseEntity<Order> placeOrder(
-            @PathVariable Long customerId, @RequestBody Order order) {
-        return ResponseEntity.ok(service.placeOrder(customerId, order));
+    public Order placeOrder(Long customerId, Order order) {
+        Customer customer = customerRepo.findById(customerId).orElseThrow();
+        order.setCustomer(customer);
+        return orderRepo.save(order);
     }
 
-    @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<Order>> getOrders(@PathVariable Long customerId) {
-        return ResponseEntity.ok(service.getOrdersByCustomer(customerId));
+    public List<Order> getOrdersByCustomer(Long customerId) {
+        return orderRepo.findByCustomerId(customerId);
     }
 }

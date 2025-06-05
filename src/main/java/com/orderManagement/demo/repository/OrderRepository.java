@@ -1,7 +1,7 @@
 package com.orderManagement.demo.repository;
 
 
-import com.simple.simpleapp.model.Order;
+import com.orderManagement.demo.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
