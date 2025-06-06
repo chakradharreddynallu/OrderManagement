@@ -3,7 +3,6 @@ package com.orderManagement.demo.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,9 @@ import com.orderManagement.demo.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
+
+
 import java.util.List;
 
 @RestController
@@ -22,7 +24,7 @@ public class OrderController {
 
     @PostMapping("/{customerId}")
     public ResponseEntity<Order> placeOrder(
-            @PathVariable Long customerId, @RequestBody Order order) {
+            @PathVariable Long customerId, @Valid @RequestBody Order order) {
         return ResponseEntity.ok(service.placeOrder(customerId, order));
     }
 

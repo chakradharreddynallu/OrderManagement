@@ -2,6 +2,7 @@ package com.orderManagement.demo.controller;
 
 import com.orderManagement.demo.model.Customer;
 import com.orderManagement.demo.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;  // Needed for @RestController, @RequestMapping, etc.
@@ -13,7 +14,7 @@ public class CustomerController {
     private CustomerService service;
 
     @PostMapping
-    public ResponseEntity<Customer> create(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> create(@Valid @RequestBody Customer customer) {
         return ResponseEntity.ok(service.createCustomer(customer));
     }
 
