@@ -48,10 +48,6 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class OrderController {
 
     @Autowired
